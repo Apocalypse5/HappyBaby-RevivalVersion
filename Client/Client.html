@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="authoring-tool" content="Adobe_Animate_CC">
+<title>开心宝贝</title>
+<link rel="icon" type="image/png" href="./src/baby.png">
+
+<style>
+    body, html {
+        height: 100%;
+        margin: 0;
+    }
+
+    #swf-container {
+        display: flex;
+        justify-content: center;  /* 水平居中 */
+        align-items: center;      /* 垂直居中 */
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+      }
+</style>
+
+<script>
+var canvas, stage, exportRoot, anim_container, dom_overlay_container, fnStartAnimation;
+function init() {
+	canvas = document.getElementById("canvas");
+	anim_container = document.getElementById("animation_container");
+	dom_overlay_container = document.getElementById("dom_overlay_container");
+	var comp=AdobeAn.getComposition("F527DF0AC35F894694BD594B94E6DDC0");
+	var lib=comp.getLibrary();
+	handleComplete({},comp);
+}
+function handleComplete(evt,comp) {
+	var lib=comp.getLibrary();
+	var ss=comp.getSpriteSheet();
+	exportRoot = new lib.Client();
+	stage = new lib.Stage(canvas);
+	stage.enableMouseOver();	
+	fnStartAnimation = function() {
+		stage.addChild(exportRoot);
+		createjs.Ticker.framerate = lib.properties.fps;
+		createjs.Ticker.addEventListener("tick", stage);
+	}	    
+	AdobeAn.makeResponsive(false,'both',false,1,[canvas,anim_container,dom_overlay_container]);	
+	AdobeAn.compositionLoaded(lib.properties.id);
+	fnStartAnimation();
+}
+</script>
+<script src="https://code.createjs.com/1.0.0/easeljs.min.js"></script>
+<script src="https://code.createjs.com/1.0.0/tweenjs.min.js"></script>
+<script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
+<script src="Client.js"></script>
+<script src="./src/PreLoad.js"></script>
+<script src="./js/Initialization.js"></script>
+
+</head>
+<body onload="init();" style="margin:0px;">
+    <div id="swf-container">
+			<div id="animation_container" style="background-color:rgba(255, 255, 255, 1.00); width:792px; height:687px">
+				<canvas id="canvas" width="792" height="687" style="position: absolute; display: block; background-color:rgba(255, 255, 255, 1.00);"></canvas>
+				<div id="dom_overlay_container" style="pointer-events:none; overflow:hidden; width:792px; height:687px; position: absolute; left: 0px; top: 0px; display: block;">
+				</div>
+			</div>
+    </div>
+    
+</body>
+</html>
