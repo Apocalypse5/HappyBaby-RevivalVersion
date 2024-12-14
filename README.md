@@ -44,6 +44,6 @@
 
 QQ：982340774
 
-手机：呃
+手机：呃...嘿嘿。
 
 邮箱：redyanbings@gmail.com / 982340774@qq.com
